@@ -2,10 +2,35 @@
 #include <vector>
 #include <cstdlib>
 #include <ctime>
+#include <regex>
+
+
 struct Button {
     std::string name;
     Button(const std::string &name);
 };
+struct Person{
+    int age;
+    std::string vardas;
+    void sokti(std::string vardas);
+
+
+    Person(std::string v); // tik vardas
+    Person(std::string vardas, int age); // vardas ir amzius
+
+};
+void Person::sokti(std::string vardas) {
+  std::cout << vardas << " soka."<< std::endl;
+}
+
+Person::Person(std::string v):vardas(v) {
+    std::cout << "Konstruktruktorius su vienu parametru!\n";
+}
+
+Person::Person(std::string vardas, int age):vardas(vardas), age(age) {
+    std::cout << "Konstruktruktorius su dviem parametrais!\n";
+}
+
 
 struct Phone {
     std::string name;
@@ -16,7 +41,7 @@ struct Phone {
     void clickButton(std::string name);
     void grabPhone(Phone phone);
 
-    void call();
+    void call(int number);
 
     void endCall();
 
@@ -29,7 +54,34 @@ struct Phone {
 
 bool isBusy();
 
+
+void keliauti_apsipirkti(Person p){
+    p.sokti(p.vardas);
+    int result = p.age * 2;
+    std::cout << p.vardas << std::endl;
+}
+void suma(int a, int b){
+    a + b;
+}
+
 int main() {
+
+
+   std::cout << "Labas aš esu krabas. Iš jūros Ą\n";
+
+    Person petras("Petras");
+    Person ona("Onute", 35);
+
+    keliauti_apsipirkti(petras);
+    keliauti_apsipirkti(ona);
+
+
+   // std::cout <<
+
+
+
+
+
     std::srand(std::time(nullptr));
 
     Phone phone("Siemens");
@@ -57,7 +109,7 @@ int main() {
                 phone.clickButton("4");
                 break;
             case 3:
-                phone.call();
+                //phone.call();
                 break;
             case 4:
                 phone.wait(5);
@@ -105,12 +157,19 @@ void Phone::clickButton(std::string name) {
 
 void Phone::grabPhone(Phone phone) {
     std::cout << "Picked phone: " << phone.name << std::endl;
-    //clickButton();
-    call();
+    int input = 0;
+    std::cout << "Enter phone number:";
+
+    //waeweawjejawe
+    // regex(wawewadea) -> tik skaicius 0-9
+    std::cin >> input;
+
+    call(input);
 
 }
 
-void Phone::call() {
+void Phone::call(int number) {
+    std::cout << "Calling..." << number<<std::endl;
     if(isBusy()){
         wait(5);
     }else{
@@ -129,7 +188,7 @@ void Phone::leaveMessage(std::string message) {
 
 void Phone::wait(int minutes) {
     std::cout << "waiting...." << minutes<< std::endl;
-    call();
+    //call();
 }
 
 bool isBusy() {
