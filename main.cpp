@@ -2,8 +2,7 @@
 #include <vector>
 #include <cstdlib>
 #include <ctime>
-#include <regex>
-
+#include <windows.h>
 
 struct Button {
     std::string name;
@@ -65,8 +64,7 @@ void suma(int a, int b){
 }
 
 int main() {
-
-
+    SetConsoleOutputCP(CP_UTF8);
    std::cout << "Labas aš esu krabas. Iš jūros Ą\n";
 
     Person petras("Petras");
